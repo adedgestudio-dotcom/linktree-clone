@@ -2,7 +2,7 @@ import React from 'react'
 
 const Navbar = () => {
   return (
-    <nav className="navbar bg-white w-[90vw] absolute top-10 right-[5vw] rounded-full p-4 flex justify-between">
+    <nav className="navbar bg-white w-[90vw] absolute top-10 right-[5vw] rounded-full p-4 flex justify-between"> 
       <div className="logo flex gap-20 items-center ">
         <img
           className="h-6 ml-16"
