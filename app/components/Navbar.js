@@ -3,7 +3,7 @@ import Link from "next/link";
 
 const Navbar = () => {
   return (
-    <nav className="navbar bg-white w-[90vw] absolute top-10 right-[5vw] rounded-full p-4 flex justify-between ">
+    <nav className="navbar bg-white w-[90vw] fixed top-10 right-[5vw] rounded-full p-4 flex justify-between ">
       {/* absolute= “Float this element freely and pin it somewhere.” */}
       <div className="logo flex gap-20 items-center ">
         <img
