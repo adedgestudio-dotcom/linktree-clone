@@ -45,19 +45,31 @@ export default function Home() {
     <main>
       <section className="relative bg-[#d2e823] min-h-screen grid grid-cols-1 lg:grid-cols-2 overflow-hidden">
         <div className="flex justify-center items-center flex-col max-w-[720px] mx-auto lg:ml-[10vw] z-10 px-6 py-12 lg:py-0">
-          <h1 className="text-[#254f1a] font-black text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl leading-[0.95] tracking-tight text-center lg:text-left max-w-[600px]">
+          <h1 className="text-[#254f1a] font-black text-6xl md:text-[89px] leading-[0.95] tracking-tight text-center lg:text-left max-w-[600px] mt:[42px] ">
             A link in bio built for you.
           </h1>
 
-          <p className="text-[#254f1a] font-medium py-6 text-sm sm:text-base text-center lg:text-left">
+          <p className="text-[#254f1a] font-medium py-6 text-lg sm:text-base text-center lg:text-left">
             Join 70M+ people using Linktree for their link in bio. One link to
             help you share everything you create, curate and sell from your
             Instagram, TikTok, Twitter, YouTube and other social media profiles.
           </p>
+
+          <div className="input-sec flex flex-col md:flex-row gap-3 w-full max-w-2xl">
+            <input
+              type="text"
+              placeholder="linktr.ee/yourname"
+              className="flex-1 px-6 py-4 bg-white rounded-lg focus:border-4 focus:border-green-900  focus:outline-none text-[#1e2330] font-medium"
+            />
+            <button className="bg-[#254f1a] hover:bg-[#1a3a12] text-white px-8 py-4 text-lg font-bold rounded-full whitespace-nowrap transition-colors  ">
+              Get started for free
+            </button>
+          </div>
+
         </div>
 
         {/* Mobile horizontal scroll */}
-        <div className="lg:hidden flex overflow-hidden py-8">
+        <div className="lg:hidden flex overflow-hidden pb-18">
           <div ref={mobileScrollRef} className="flex gap-4 items-center">
             {/* First set */}
             <Image
