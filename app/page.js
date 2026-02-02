@@ -43,9 +43,9 @@ export default function Home() {
 
   return (
     <main>
-      <section className="relative bg-[#d2e823] min-h-screen grid grid-cols-1 lg:grid-cols-2 overflow-hidden">
-        <div className="flex justify-center items-center flex-col max-w-[720px] mx-auto lg:ml-[10vw] z-10 px-6 py-12 lg:py-0">
-          <h1 className="text-[#254f1a] font-black text-6xl md:text-[89px] leading-[0.95] tracking-tight text-center lg:text-left max-w-[600px] mt:[42px] ">
+      <section className="relative bg-[#d2e823] min-h-[90vh] grid grid-cols-1 lg:grid-cols-2 overflow-hidden">
+        <div className="flex justify-center items-start flex-col max-w-[720px] mx-auto lg:ml-[10vw] z-10 px-6 py-12 lg:py-0">
+          <h1 className="text-[#254f1a] font-black text-6xl md:text-[89px] leading-[0.95] tracking-tight text-center lg:text-left max-w-[600px] mt-[94px]">
             A link in bio built for you.
           </h1>
 
@@ -55,17 +55,16 @@ export default function Home() {
             Instagram, TikTok, Twitter, YouTube and other social media profiles.
           </p>
 
-          <div className="input-sec flex flex-col md:flex-row gap-3 w-full max-w-2xl">
+          <div className="input-sec flex flex-col md:flex-row gap-4 w-full max-w-2xl">
             <input
               type="text"
               placeholder="linktr.ee/yourname"
-              className="flex-1 px-6 py-4 bg-white rounded-lg focus:border-4 focus:border-green-900  focus:outline-none text-[#1e2330] font-medium"
+              className="flex-1 px-6 py-4 bg-white rounded-lg focus:border-4 focus:border-green-800  focus:outline-none text-[#1e2330] font-medium"
             />
             <button className="bg-[#254f1a] hover:bg-[#1a3a12] text-white px-8 py-4 text-lg font-bold rounded-full whitespace-nowrap transition-colors  ">
               Get started for free
             </button>
           </div>
-
         </div>
 
         {/* Mobile horizontal scroll */}
