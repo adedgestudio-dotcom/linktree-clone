@@ -245,7 +245,27 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="bg-[#2665d6] min-h-screen"></section>
+      <section className="sec-2 bg-[#2665d6] min-h-[90vh] flex flex-col md:grid md:grid-cols-2">
+        <div className="video-container flex justify-center items-start flex-col max-w-[720px] mx-auto md:ml-[10vw] z-10 px-6 py-12 md:py-0 order-2 md:order-1 -mt-[44px] ">
+          <video autoPlay loop muted playsInline width="100%" height="auto">
+            <source src="/second-sec.webm" type="video/mp4" />
+          </video>
+        </div>
+
+        <div className="input-sec flex flex-col gap-4 w-full max-w-2xl justify-center items-center md:items-start px-6 py-12 order-1 md:order-2">
+          <h1 className="text-[#d2e823] font-black text-4xl md:text-[60px] leading-[0.95] tracking-tight text-center md:text-left max-w-[600px]">
+            Create and customize your Linktree in minutes
+          </h1>
+          <p className="text-white font-medium text-base sm:text-[22px] py-6 text-center md:text-left">
+            Connect all your content across social media, websites, stores and
+            more in one link in bio. Customize every detail or let Linktree
+            automatically enhance it to match your brand and drive more clicks.
+          </p>
+          <button className="bg-[#d2e823] hover:bg-[#c6de15] text-black px-8 py-4 text-lg font-bold rounded-full whitespace-nowrap transition-colors">
+            Get started for free
+          </button>
+        </div>
+      </section>
       <section className="bg-[#780016] min-h-screen"></section>
       <section className="bg-[#e8efd6] min-h-screen"></section>
       <section className="bg-[#f3f3f1] min-h-screen"></section>
