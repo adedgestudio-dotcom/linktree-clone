@@ -266,7 +266,31 @@ export default function Home() {
           </button>
         </div>
       </section>
-      <section className="bg-[#780016] min-h-screen"></section>
+      <section className="sec-3 bg-[#780016] relative min-h-[90vh] grid grid-cols-1 lg:grid-cols-2 overflow-hidden">
+        <div className="flex justify-center items-start flex-col max-w-[720px] mx-auto lg:ml-[10vw] z-10 px-6 py-12 lg:py-0">
+          <h1 className="text-[#e9c0e9] font-black text-6xl md:text-[62px] leading-[0.95] tracking-tight text-center lg:text-left max-w-[600px] mt-[94px]">
+            Share your Linktree anywhere you like!
+          </h1>
+
+          <p className="text-[#e9c0e9] font-medium py-6 text-lg sm:text-base text-center lg:text-left">
+            Add your unique Linktree URL to all the platforms and places you
+            find your audience. Then use your QR code to drive your offline
+            traffic back to your link in bio.
+          </p>
+
+          <div className="input-sec flex flex-col md:flex-row gap-4 w-full max-w-2xl">
+            <button className="bg-[#e9c0e9] hover:bg-[#ea98ea] text-black px-8 py-4 text-lg font-bold rounded-full whitespace-nowrap transition-colors  ">
+              Get started for free
+            </button>
+          </div>
+        </div>
+
+        <div className="order-2 lg:order-1 flex justify-center">
+          <div className="w-full max-w-lg h-[600px]">
+            <RiveComponent />
+          </div>
+        </div>
+      </section>
       <section className="bg-[#e8efd6] min-h-screen"></section>
       <section className="bg-[#f3f3f1] min-h-screen"></section>
     </main>
