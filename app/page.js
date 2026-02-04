@@ -1,5 +1,5 @@
 "use client";
-import RiveAnimation from "@/components/RiveAnimation";
+import RiveAnimation from "@/components/RiveAnimation.jsx";
 
 import Image from "next/image";
 import { useEffect, useRef } from "react";
