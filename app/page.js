@@ -1,4 +1,5 @@
 "use client";
+import RiveAnimation from "@/components/RiveAnimation";
 
 import Image from "next/image";
 import { useEffect, useRef } from "react";
@@ -287,7 +288,7 @@ export default function Home() {
 
         <div className="order-2 lg:order-1 flex justify-center">
           <div className="w-full max-w-lg h-[600px]">
-            <RiveComponent />
+            <RiveAnimation />
           </div>
         </div>
       </section>
