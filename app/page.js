@@ -292,7 +292,33 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <section className="bg-[#e8efd6] min-h-screen"></section>
+
+      <section className=" sec-4 bg-[#e8efd6] min-h-[90vh] grid grid-cols-1 lg:grid-cols-2 overflow-hidden">
+        <div className="image order-2 lg:order-1">
+          <img
+            src="https://cdn.prod.website-files.com/666255f7f2126f4e8cec6f8f/68b80693934ab0ccd4bf7482_home-section-4.avif"
+            alt=""
+          />
+        </div>
+
+        <div className="flex justify-center items-start flex-col gap-6 max-w-[620px] mx-auto md:ml-[72px] z-10 px-4 py-8 lg:py-0 order-1 lg:order-2">
+          <h1 className="text-[#1e2330] font-black  text-[40px] md:text-[62px] leading-[0.95] tracking-tight text-center lg:text-left max-w-[600px] mt-8 lg:mt-[94px]  ">
+            Share your Linktree anywhere you like!
+          </h1>
+
+          <p className="text-[#1e2330] font-medium text-[20px] sm:text-base text-center lg:text-left">
+            Add your unique Linktree URL to all the platforms and places you
+            find your audience. Then use your QR code to drive your offline
+            traffic back to your link in bio.
+          </p>
+
+          <div className="input-sec flex flex-col md:flex-row gap-6 w-full max-w-2xl">
+            <button className="bg-[#e9c0e9] hover:bg-[#ea98ea] text-black px-8 py-4 text-lg font-bold rounded-full whitespace-nowrap transition-colors  ">
+              Get started for free
+            </button>
+          </div>
+        </div>
+      </section>
       <section className="bg-[#f3f3f1] min-h-screen"></section>
     </main>
   );
