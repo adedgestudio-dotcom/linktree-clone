@@ -73,27 +73,28 @@ export default function FlipCard({
   return (
     <div
       ref={cardRef}
-      className="flip-card-container w-[250px] h-[250px] cursor-pointer"
-      style={{ perspective: "1000px" }}
+      className="flip-card-container w-[250px] h-[250px] cursor-pointer flex-shrink-0"
+      style={{
+        perspective: "1500px",
+      }}
     >
       <div
         ref={innerRef}
-        className="flip-card-inner w-full h-full relative"
+        className="w-full h-full relative"
         style={{
           transformStyle: "preserve-3d",
-          transition: "transform 0.6s ease-in-out",
-          willChange: "transform",
+          transition: "transform 0.7s cubic-bezier(0.4, 0.2, 0.2, 1)",
+          transform: "rotateY(0deg)",
         }}
       >
+        {/* Front */}
         <div
-          className="flip-card-front absolute w-full h-full overflow-hidden"
+          className="absolute inset-0"
           style={{
             backfaceVisibility: "hidden",
             WebkitBackfaceVisibility: "hidden",
-            transform: "rotateY(0deg) translateZ(1px)",
             borderRadius,
-            boxShadow:
-              "0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)",
+            overflow: "hidden",
           }}
         >
           <Image
@@ -106,16 +107,16 @@ export default function FlipCard({
           />
         </div>
 
+        {/* Back */}
         <div
-          className="flip-card-back absolute w-full h-full flex flex-col items-center justify-center gap-3 p-6 overflow-hidden"
+          className="absolute inset-0 flex flex-col items-center justify-center gap-3 p-6"
           style={{
-            backgroundColor: bgColor,
             backfaceVisibility: "hidden",
             WebkitBackfaceVisibility: "hidden",
-            transform: "rotateY(180deg) translateZ(1px)",
+            transform: "rotateY(180deg)",
+            backgroundColor: bgColor,
             borderRadius,
-            boxShadow:
-              "0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)",
+            overflow: "hidden",
           }}
         >
           <a

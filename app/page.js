@@ -606,6 +606,12 @@ export default function Home() {
               />
             </div>
           </div>
+          <h1 className="text-[#1e2330] font-black  text-[40px] md:text-[62px] leading-[0.95] tracking-tight text-center lg:text-left max-w-[600px] mt-8 lg:mt-[94px]  ">
+            Share your Linktree anywhere you like!
+          </h1>
+          <button className="bg-[#e9c0e9] hover:bg-[#ea98ea] text-black px-8 py-4 text-lg font-bold rounded-full whitespace-nowrap transition-colors  ">
+            Explore All Plans
+          </button>
         </div>
       </section>
     </main>
