@@ -1,16 +1,20 @@
 "use client";
 import RiveAnimation from "./components/RiveAnimation";
-
 import Image from "next/image";
 import { useEffect, useRef } from "react";
+import RotatingText from "./components/RotatingText";
+import FlipCard from "./components/FlipCard";
 
 export default function Home() {
   const scrollRef = useRef(null);
   const mobileScrollRef = useRef(null);
+  const sec5ScrollRef = useRef(null);
+  const sec5XRef = useRef(0);
 
   useEffect(() => {
     let y = 0;
     let x = 0;
+    let animationId1, animationId2, animationId3;
 
     const moveVertical = () => {
       if (!scrollRef.current) return;
@@ -22,7 +26,7 @@ export default function Home() {
       }
 
       scrollRef.current.style.transform = `translateY(${y}px)`;
-      requestAnimationFrame(moveVertical);
+      animationId1 = requestAnimationFrame(moveVertical);
     };
 
     const moveHorizontal = () => {
@@ -35,11 +39,57 @@ export default function Home() {
       }
 
       mobileScrollRef.current.style.transform = `translateX(${x}px)`;
-      requestAnimationFrame(moveHorizontal);
+      animationId2 = requestAnimationFrame(moveHorizontal);
     };
+
+    // Section 5 horizontal loop
+    let sec5ResetWidth = 0;
+    const sec5Speed = 0.5;
+
+    // Calculate exact width after DOM renders
+    setTimeout(() => {
+      if (!sec5ScrollRef.current) return;
+
+      const children = Array.from(sec5ScrollRef.current.children);
+      const halfLength = children.length / 2;
+      let totalWidth = 0;
+
+      // Calculate width of first half (original set)
+      for (let i = 0; i < halfLength; i++) {
+        totalWidth += children[i].offsetWidth;
+      }
+
+      // Add gaps
+      const gap = 24; // gap-6 = 24px
+      totalWidth += gap * (halfLength - 1);
+
+      sec5ResetWidth = totalWidth;
+
+      const animateSec5 = () => {
+        if (!sec5ScrollRef.current) return;
+
+        sec5XRef.current -= sec5Speed;
+
+        // Reset at exact calculated width
+        if (Math.abs(sec5XRef.current) >= sec5ResetWidth) {
+          sec5XRef.current = 0;
+        }
+
+        sec5ScrollRef.current.style.transform = `translateX(${sec5XRef.current}px)`;
+        animationId3 = requestAnimationFrame(animateSec5);
+      };
+
+      animateSec5();
+    }, 300);
 
     moveVertical();
     moveHorizontal();
+
+    return () => {
+      if (animationId1) cancelAnimationFrame(animationId1);
+      if (animationId2) cancelAnimationFrame(animationId2);
+      if (animationId3) cancelAnimationFrame(animationId3);
+    };
   }, []);
 
   return (
@@ -319,7 +369,245 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <section className="bg-[#f3f3f1] min-h-screen"></section>
+      <section className="sec-5 bg-[#f3f3f1] min-h-auto flex justify-center items-center overflow-hidden">
+        <div className="flex justify-center items-center flex-col gap-8 mx-auto z-10 px-4 py-8">
+          <h1 className="text-6xl sm:text-[42px] md:text-[62px] lg:text-[82px] font-black text-[#1e2330] text-center px-4 max-w-[90vw] sm:max-w-none leading-tight">
+            <span className="block mb-1 sm:mb-2 md:mb-4">
+              Create your Linktree in
+            </span>
+            <span className="block -mt-1 sm:-mt-4 md:-mt-[36px]">
+              <RotatingText
+                text={["minutes", "seconds", "moments"]}
+                duration={3000}
+                className="text-[#1378d1]"
+              />
+            </span>
+          </h1>
+          <div className="flex overflow-hidden pb-18">
+            <div
+              ref={sec5ScrollRef}
+              className="flex gap-6 items-center will-change-transform"
+            >
+              {/* First set */}
+              <FlipCard
+                imageSrc="/pistakio.png"
+                alt="pistakio"
+                bgColor="#d2e823"
+                textColor="#254f1a"
+                borderRadius="1rem"
+              />
+              <FlipCard
+                imageSrc="/music.png"
+                alt="music"
+                bgColor="#2665d6"
+                textColor="#d2e823"
+                borderRadius="50%"
+              />
+              <FlipCard
+                imageSrc="/fitness.png"
+                alt="fitness"
+                bgColor="#780016"
+                textColor="#e9c0e9"
+                borderRadius="2.5rem"
+              />
+              <FlipCard
+                imageSrc="/phone.png"
+                alt="phone"
+                bgColor="#1378d1"
+                textColor="#ffffff"
+                borderRadius="0.5rem"
+              />
+              <FlipCard
+                imageSrc="/music.png"
+                alt="music"
+                bgColor="#e8efd6"
+                textColor="#1e2330"
+                borderRadius="3rem"
+              />
+              {/* Second set */}
+              <FlipCard
+                imageSrc="/fitness.png"
+                alt="fitness"
+                bgColor="#d2e823"
+                textColor="#254f1a"
+                borderRadius="50%"
+              />
+              <FlipCard
+                imageSrc="/pistakio.png"
+                alt="pistakio"
+                bgColor="#2665d6"
+                textColor="#d2e823"
+                borderRadius="1.5rem"
+              />
+              <FlipCard
+                imageSrc="/phone.png"
+                alt="phone"
+                bgColor="#780016"
+                textColor="#e9c0e9"
+                borderRadius="1rem"
+              />
+              <FlipCard
+                imageSrc="/music.png"
+                alt="music"
+                bgColor="#1378d1"
+                textColor="#ffffff"
+                borderRadius="2rem"
+              />
+              <FlipCard
+                imageSrc="/fitness.png"
+                alt="fitness"
+                bgColor="#e8efd6"
+                textColor="#1e2330"
+                borderRadius="0.75rem"
+              />
+              {/* Third set */}
+              <FlipCard
+                imageSrc="/phone.png"
+                alt="phone"
+                bgColor="#d2e823"
+                textColor="#254f1a"
+                borderRadius="2.5rem"
+              />
+              <FlipCard
+                imageSrc="/fitness.png"
+                alt="fitness"
+                bgColor="#2665d6"
+                textColor="#d2e823"
+                borderRadius="1rem"
+              />
+              <FlipCard
+                imageSrc="/pistakio.png"
+                alt="pistakio"
+                bgColor="#780016"
+                textColor="#e9c0e9"
+                borderRadius="50%"
+              />
+              <FlipCard
+                imageSrc="/music.png"
+                alt="music"
+                bgColor="#1378d1"
+                textColor="#ffffff"
+                borderRadius="3rem"
+              />
+              <FlipCard
+                imageSrc="/phone.png"
+                alt="phone"
+                bgColor="#e8efd6"
+                textColor="#1e2330"
+                borderRadius="1.5rem"
+              />
+              {/* Fourth set */}
+              <FlipCard
+                imageSrc="/pistakio.png"
+                alt="pistakio"
+                bgColor="#d2e823"
+                textColor="#254f1a"
+                borderRadius="1rem"
+              />
+              <FlipCard
+                imageSrc="/music.png"
+                alt="music"
+                bgColor="#2665d6"
+                textColor="#d2e823"
+                borderRadius="50%"
+              />
+              <FlipCard
+                imageSrc="/fitness.png"
+                alt="fitness"
+                bgColor="#780016"
+                textColor="#e9c0e9"
+                borderRadius="2.5rem"
+              />
+              <FlipCard
+                imageSrc="/phone.png"
+                alt="phone"
+                bgColor="#1378d1"
+                textColor="#ffffff"
+                borderRadius="0.5rem"
+              />
+              <FlipCard
+                imageSrc="/music.png"
+                alt="music"
+                bgColor="#e8efd6"
+                textColor="#1e2330"
+                borderRadius="3rem"
+              />
+              {/* Fifth set */}
+              <FlipCard
+                imageSrc="/fitness.png"
+                alt="fitness"
+                bgColor="#d2e823"
+                textColor="#254f1a"
+                borderRadius="50%"
+              />
+              <FlipCard
+                imageSrc="/pistakio.png"
+                alt="pistakio"
+                bgColor="#2665d6"
+                textColor="#d2e823"
+                borderRadius="1.5rem"
+              />
+              <FlipCard
+                imageSrc="/phone.png"
+                alt="phone"
+                bgColor="#780016"
+                textColor="#e9c0e9"
+                borderRadius="1rem"
+              />
+              <FlipCard
+                imageSrc="/music.png"
+                alt="music"
+                bgColor="#1378d1"
+                textColor="#ffffff"
+                borderRadius="2rem"
+              />
+              <FlipCard
+                imageSrc="/fitness.png"
+                alt="fitness"
+                bgColor="#e8efd6"
+                textColor="#1e2330"
+                borderRadius="0.75rem"
+              />
+              {/* Sixth set */}
+              <FlipCard
+                imageSrc="/phone.png"
+                alt="phone"
+                bgColor="#d2e823"
+                textColor="#254f1a"
+                borderRadius="2.5rem"
+              />
+              <FlipCard
+                imageSrc="/fitness.png"
+                alt="fitness"
+                bgColor="#2665d6"
+                textColor="#d2e823"
+                borderRadius="1rem"
+              />
+              <FlipCard
+                imageSrc="/pistakio.png"
+                alt="pistakio"
+                bgColor="#780016"
+                textColor="#e9c0e9"
+                borderRadius="50%"
+              />
+              <FlipCard
+                imageSrc="/music.png"
+                alt="music"
+                bgColor="#1378d1"
+                textColor="#ffffff"
+                borderRadius="3rem"
+              />
+              <FlipCard
+                imageSrc="/phone.png"
+                alt="phone"
+                bgColor="#e8efd6"
+                textColor="#1e2330"
+                borderRadius="1.5rem"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
     </main>
   );
 }
