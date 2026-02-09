@@ -81,32 +81,41 @@ export default function FlipCard({
         className="flip-card-inner w-full h-full relative"
         style={{
           transformStyle: "preserve-3d",
-          transition: "transform 0.8s cubic-bezier(0.4, 0.0, 0.2, 1)",
+          transition: "transform 0.6s ease-in-out",
           willChange: "transform",
         }}
       >
         <div
-          className="flip-card-front absolute w-full h-full"
-          style={{ backfaceVisibility: "hidden" }}
+          className="flip-card-front absolute w-full h-full overflow-hidden"
+          style={{
+            backfaceVisibility: "hidden",
+            WebkitBackfaceVisibility: "hidden",
+            transform: "rotateY(0deg) translateZ(1px)",
+            borderRadius,
+            boxShadow:
+              "0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)",
+          }}
         >
           <Image
             src={imageSrc}
             alt={alt}
             width={250}
             height={250}
-            className="shadow-lg w-full h-full object-cover"
-            style={{ borderRadius }}
+            className="w-full h-full object-cover"
             quality={100}
           />
         </div>
 
         <div
-          className="flip-card-back absolute w-full h-full shadow-lg flex flex-col items-center justify-center gap-3 p-6"
+          className="flip-card-back absolute w-full h-full flex flex-col items-center justify-center gap-3 p-6 overflow-hidden"
           style={{
             backgroundColor: bgColor,
             backfaceVisibility: "hidden",
-            transform: "rotateY(180deg)",
+            WebkitBackfaceVisibility: "hidden",
+            transform: "rotateY(180deg) translateZ(1px)",
             borderRadius,
+            boxShadow:
+              "0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)",
           }}
         >
           <a
