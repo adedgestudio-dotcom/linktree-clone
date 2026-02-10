@@ -96,9 +96,9 @@ export default function Home() {
 
   return (
     <main>
-      <section className="relative bg-[#d2e823] min-h-[90vh] grid grid-cols-1 lg:grid-cols-2 overflow-hidden">
+      <section className="relative bg-[#d2e823] min-h-[90vh] grid grid-cols-1 lg:grid-cols-2 overflow-hidden pt-16 ">
         <div className="flex justify-center items-start flex-col max-w-[720px] mx-auto lg:ml-[10vw] z-10 px-6 py-6 lg:py-0 ">
-          <h1 className="text-[#254f1a] font-black text-6xl md:text-[89px] leading-[0.95] tracking-tight text-center lg:text-left max-w-[600px] mt-8">
+          <h1 className="text-[#254f1a] font-black text-[48px] md:text-[89px] leading-[0.95] tracking-tight text-center lg:text-left max-w-[600px] mt-12">
             A link in bio built for you.
           </h1>
 
@@ -306,7 +306,7 @@ export default function Home() {
         </div>
 
         <div className="input-sec flex flex-col gap-6 w-full max-w-2xl justify-center items-center md:items-start px-6 py-12 order-1 md:order-2">
-          <h1 className="text-[#d2e823] font-black text-[42px] md:text-[64px] leading-[0.95] tracking-tight text-center md:text-left max-w-[600px]">
+          <h1 className="text-[#d2e823] font-black text-[29px] md:text-[64px] leading-[0.95] tracking-tight text-center md:text-left max-w-[600px]">
             Create and customize your Linktree in minutes
           </h1>
           <p className="text-white font-medium  text-[16px] sm:text-[22px] text-center md:text-left">
@@ -321,7 +321,7 @@ export default function Home() {
       </section>
       <section className="sec-3 bg-[#780016] relative min-h-[90vh] grid grid-cols-1 lg:grid-cols-2 overflow-hidden">
         <div className="flex justify-center items-start flex-col gap-6 max-w-[720px] mx-auto lg:ml-[10vw] z-10 px-6 py-8 lg:py-0">
-          <h1 className="text-[#e9c0e9] font-black  text-[40px] md:text-[62px] leading-[0.95] tracking-tight text-center lg:text-left max-w-[600px] mt-8 lg:mt-[94px]">
+          <h1 className="text-[#e9c0e9] font-black  text-[30px] md:text-[62px] leading-[0.95] tracking-tight text-center lg:text-left max-w-[600px] mt-8 lg:mt-[94px]">
             Share your Linktree anywhere you like!
           </h1>
 
@@ -373,7 +373,7 @@ export default function Home() {
       </section>
       <section className="sec-5 bg-[#f3f3f1] min-h-auto flex justify-center items-center overflow-hidden pb-16 md:pb-32">
         <div className="flex justify-center items-center flex-col gap-8 mx-auto z-10 px-4 py-8">
-          <h1 className="text-[42px] sm:text-[42px] md:text-[62px] lg:text-[82px] font-black text-[#1e2330] text-center px-4 max-w-[90vw] sm:max-w-none leading-tight">
+          <h1 className="text-[48px] sm:text-[42px] md:text-[62px] lg:text-[82px] font-black text-[#1e2330] text-center px-4 max-w-[90vw] sm:max-w-none leading-tight">
             <span className="block mb-1 sm:mb-2 md:mb-4">
               Create your Linktree in
             </span>
