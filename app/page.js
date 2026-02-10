@@ -4,6 +4,8 @@ import Image from "next/image";
 import { useEffect, useRef } from "react";
 import RotatingText from "./components/RotatingText";
 import FlipCard from "./components/FlipCard";
+import Accordion from "./components/Accordion";
+import Footer from "./components/Footer";
 
 export default function Home() {
   const scrollRef = useRef(null);
@@ -369,9 +371,9 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <section className="sec-5 bg-[#f3f3f1] min-h-auto flex justify-center items-center overflow-hidden">
+      <section className="sec-5 bg-[#f3f3f1] min-h-auto flex justify-center items-center overflow-hidden pb-16 md:pb-32">
         <div className="flex justify-center items-center flex-col gap-8 mx-auto z-10 px-4 py-8">
-          <h1 className="text-6xl sm:text-[42px] md:text-[62px] lg:text-[82px] font-black text-[#1e2330] text-center px-4 max-w-[90vw] sm:max-w-none leading-tight">
+          <h1 className="text-[42px] sm:text-[42px] md:text-[62px] lg:text-[82px] font-black text-[#1e2330] text-center px-4 max-w-[90vw] sm:max-w-none leading-tight">
             <span className="block mb-1 sm:mb-2 md:mb-4">
               Create your Linktree in
             </span>
@@ -607,7 +609,7 @@ export default function Home() {
             </div>
           </div>
 
-          <h1 className="text-[#1e2330] font-black text-[42px] md:text-[64px] leading-tight tracking-tight text-center max-w-[800px]">
+          <h1 className="text-[#1e2330] font-black text-[38px] md:text-[64px] leading-tight tracking-tight text-center max-w-[90vw] md:max-w-[800px] px-4">
             The fast, friendly and powerful link in bio tool.
           </h1>
           <button className="bg-[#e9c0e9] hover:bg-[#ddb3dd] text-[#1e2330] px-18 py-4 text-lg font-semibold rounded-full transition-colors  ">
@@ -615,6 +617,29 @@ export default function Home() {
           </button>
         </div>
       </section>
+
+      <section className="sec-7 bg-[#780016] min-h-screen px-4 pt-32 pb-20">
+        <div className="max-w-5xl mx-auto">
+          <h2 className="text-white font-black text-[42px] md:text-[64px] text-center mb-16">
+            Questions? Answered
+          </h2>
+          <div className="flex flex-col gap-6">
+            <Accordion
+              question="Why should podcasters use Linktree?"
+              answer="Right now, every time you've got something new to share, you have to go to every single one of your channels to change the link in each of your bios. It's time-consuming and complicated — making it so much harder to keep everything up to date. A link in bio tool means you never have to compromise, or remove one link from your bio so you can add another. You can keep everything you want to share online in one link. When you've got a change, you only ever have to make it once."
+            />
+            <Accordion
+              question="Is Linktree the original link in bio tool?"
+              answer="Yes, Linktree pioneered the link in bio category in 2016 and has grown to become the most trusted and widely used platform, serving over 70 million users worldwide."
+            />
+            <Accordion
+              question="Can you get paid and sell things from a Linktree?"
+              answer="Absolutely! With Linktree, you can integrate payment platforms, sell products, accept tips, and monetize your content directly from your link in bio. Our Commerce Links make it easy to turn your audience into customers."
+            />
+          </div>
+        </div>
+      </section>
+      <Footer />
     </main>
   );
 }

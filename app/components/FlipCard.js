@@ -73,7 +73,7 @@ export default function FlipCard({
   return (
     <div
       ref={cardRef}
-      className="flip-card-container w-[250px] h-[250px] cursor-pointer flex-shrink-0"
+      className="flip-card-container w-[250px] h-[250px] cursor-pointer shrink-0"
       style={{
         perspective: "1500px",
       }}
@@ -95,6 +95,8 @@ export default function FlipCard({
             WebkitBackfaceVisibility: "hidden",
             borderRadius,
             overflow: "hidden",
+            zIndex: 2,
+            transform: "rotateY(0deg)",
           }}
         >
           <Image
@@ -117,6 +119,7 @@ export default function FlipCard({
             backgroundColor: bgColor,
             borderRadius,
             overflow: "hidden",
+            zIndex: 1,
           }}
         >
           <a
