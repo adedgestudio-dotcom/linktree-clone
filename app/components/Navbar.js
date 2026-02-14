@@ -8,9 +8,9 @@ const Navbar = () => {
 
   return (
     <nav className="navbar bg-white w-[95vw] md:w-[90vw] fixed top-4 md:top-10 right-[2.5vw] md:right-[5vw] rounded-full p-3 md:p-4 flex flex-row justify-between items-center z-50">
-      <div className="logo flex flex-row gap-2 md:gap-20 items-center">
+      <div className="logo flex flex-row gap-2 md:gap-20 items-center  ">
         <img
-          className="h-5 md:h-6 md:ml-16 hidden md:block"
+          className="h-5 md:h-6 md:ml-12 hidden md:block"
           loading="eager"
           src="https://cdn.prod.website-files.com/666255f7f2126f4e8cec6f8f/66634daccb34e6d65a41c76d_download.svg"
           alt="Linktree Logo"

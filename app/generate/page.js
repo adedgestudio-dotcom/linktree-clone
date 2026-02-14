@@ -1,6 +1,73 @@
+"use client";
 import React from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useState, useRef } from "react";
 
 const generate = () => {
+  const [links, setLinks] = useState([{ link: "", linktext: "" }]);
+  //   const [linktext, setlinktext] = useState("");
+  const [handle, sethandle] = useState("");
+  const [pic, setpic] = useState("");
+
+  const linkInputRef = useRef(null);
+  const linktextInputRef = useRef(null);
+  const picInputRef = useRef(null);
+
+  const handleChange = (index, link, linktext) => {
+    setLinks((initialLinks)=>{
+        return initialLinks.map((item, i)=> {
+            if (i === index){
+                return {link, linktext}
+            }
+            else{
+                return item
+            }
+        })
+
+    })
+  }
+
+
+  const addLink = () => {
+    setLinks(links.concat([{link: "", linktext: ""}]))
+   }
+
+  const submitLinks = async (text, link, handle) => {
+    try {
+      const myHeaders = new Headers();
+      myHeaders.append("Content-Type", "application/json");
+
+      const raw = JSON.stringify({
+        links: links,
+        handle: handle,
+        pic: pic
+      });
+
+      console.log(raw);
+
+
+      const requestOptions = {
+        method: "POST",
+        headers: myHeaders,
+        body: raw,
+        redirect: "follow",
+      };
+
+      const r = await fetch("http://localhost:3000/api/add", requestOptions);
+      const result = await r.json();
+
+      if (result.success) {
+        toast.success("Link added successfully!");
+        setLinks([{ link: "", linktext: "" }]);
+      } else {
+        toast.error("Failed to add link");
+      }
+    } catch (error) {
+      toast.error("Error adding link");
+    }
+  };
+
   return (
     <div className="bg-[#d5a334] grid grid-cols-1 lg:grid-cols-2 min-h-screen">
       <div className="form flex justify-center items-center flex-col px-6 sm:px-8 lg:px-14 py-8 lg:py-0 mt-[15vh] ">
@@ -14,14 +81,47 @@ const generate = () => {
             </p>
           </div>
 
+          <style jsx global>{`
+            .Toastify__toast--success {
+              background-color: white !important;
+              color: #d5a334 !important;
+            }
+            .Toastify__toast--error {
+              background-color: white !important;
+              color: #c4841f !important;
+            }
+            .Toastify__toast--info {
+              background-color: white !important;
+              color: #d5a334 !important;
+            }
+            .Toastify__progress-bar--success {
+              background-color: #d5a334 !important;
+            }
+            .Toastify__progress-bar--error {
+              background-color: #c4841f !important;
+            }
+            .Toastify__progress-bar--info {
+              background-color: #d5a334 !important;
+            }
+          `}</style>
+
           {/* Step 1: Claim your Handle */}
           <div className="space-y-2">
             <h2 className="text-lg sm:text-xl font-semibold text-white">
               Step 1: Claim your Handle
             </h2>
             <input
+              value={handle || ""}
+              onChange={(e) => {
+                sethandle(e.target.value);
+              }}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  linkInputRef.current?.focus();
+                }
+              }}
               type="text"
-              placeholder="claim handle"
+              placeholder="choose handle"
               className="w-full px-4 py-3 rounded-lg bg-white/10 backdrop-blur-sm border border-white/20 text-white placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-white/40 focus:border-transparent transition-all duration-200"
             />
           </div>
@@ -31,19 +131,48 @@ const generate = () => {
             <h2 className="text-lg sm:text-xl font-semibold text-white">
               Step 2: Add Links
             </h2>
-            <div className="flex flex-col sm:flex-row gap-3">
-              <input
-                type="text"
-                placeholder="Enter link text"
-                className="flex-1 px-4 py-3 rounded-lg bg-white/10 backdrop-blur-sm border border-white/20 text-white placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-white/40 focus:border-transparent transition-all duration-200"
-              />
-              <input
-                type="text"
-                placeholder="Enter link"
-                className="flex-1 px-4 py-3 rounded-lg bg-white/10 backdrop-blur-sm border border-white/20 text-white placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-white/40 focus:border-transparent transition-all duration-200"
-              />
-            </div>
-            <button className="w-fit px-6 py-3 bg-white text-[#d5a334] font-bold text-base sm:text-lg rounded-lg hover:bg-white/90 transform hover:scale-[1.02] transition-all duration-200 shadow-2xl hover:shadow-xl tracking-wide">
+            {links &&
+              links.map((item, index) => {
+                return (
+                  <div key={index} className="flex flex-col sm:flex-row gap-3">
+                    <input
+                      ref={linkInputRef}
+                      value={item.link || ""}
+                      onChange={(e) => {
+                        handleChange(index, e.target.value, item.linktext);
+                      }}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter") {
+                          linktextInputRef.current?.focus();
+                        }
+                      }}
+                      type="text"
+                      placeholder="Enter link text"
+                      className="flex-1 px-4 py-3 rounded-lg bg-white/10 backdrop-blur-sm border border-white/20 text-white placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-white/40 focus:border-transparent transition-all duration-200"
+                    />
+                    <input
+                      ref={linktextInputRef}
+                      value={item.linktext || ""}
+                      onChange={(e) => {
+                        handleChange(index, item.link, e.target.value,);
+                      }}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter") {
+                          addLink(item.linktext, item.link, handle);
+                        }
+                      }}
+                      type="text"
+                      placeholder="Enter link"
+                      className="flex-1 px-4 py-3 rounded-lg bg-white/10 backdrop-blur-sm border border-white/20 text-white placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-white/40 focus:border-transparent transition-all duration-200"
+                    />
+                  </div>
+                );
+              })}
+
+            <button
+              onClick={() => addLink()}
+              className="w-fit px-6 py-3 mt-4 bg-white text-[#d5a334] font-bold text-base sm:text-lg rounded-lg hover:bg-white/90 transform hover:scale-[1.02] transition-all duration-200 shadow-2xl hover:shadow-xl tracking-wide cursor-pointer"
+            >
               Add Link
             </button>
           </div>
@@ -54,12 +183,25 @@ const generate = () => {
               Step 3: Add Picture and Finalize
             </h2>
             <input
+              ref={picInputRef}
+              value={pic || ""}
+              onChange={(e) => {
+                setpic(e.target.value);
+              }}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  // Add your create link function here
+                  toast.info("Create Link functionality coming soon!");
+                }
+              }}
               type="text"
               placeholder="Enter link to your Picture"
               className="w-full px-4 py-3 rounded-lg bg-white/10 backdrop-blur-sm border border-white/20 text-white placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-white/40 focus:border-transparent transition-all duration-200"
             />
-            <button className="w-fit px-6 py-3 bg-white text-[#d5a334] font-bold text-base sm:text-lg rounded-lg hover:bg-white/90 transform hover:scale-[1.02] transition-all duration-200 shadow-2xl hover:shadow-xl tracking-wide">
-              Create your BitLink
+            <button
+           onClick={()=>{submitLinks}}
+            className="w-fit px-6 py-3 mt-4 bg-white text-[#d5a334] font-bold text-base sm:text-lg rounded-lg hover:bg-white/90 transform hover:scale-[1.02] transition-all duration-200 shadow-2xl hover:shadow-xl tracking-wide cursor-pointer">
+              Create your Link
             </button>
           </div>
         </div>
@@ -71,6 +213,7 @@ const generate = () => {
           alt="generate"
         />
       </div>
+      <ToastContainer />
     </div>
   );
 };
