@@ -1,17 +1,29 @@
 "use client";
 import RiveAnimation from "./components/RiveAnimation";
 import Image from "next/image";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import { useRouter } from "next/navigation";
 import RotatingText from "./components/RotatingText";
 import FlipCard from "./components/FlipCard";
 import Accordion from "./components/Accordion";
 import Footer from "./components/Footer";
 
 export default function Home() {
+  const router = useRouter();
   const scrollRef = useRef(null);
   const mobileScrollRef = useRef(null);
   const sec5ScrollRef = useRef(null);
   const sec5XRef = useRef(0);
+  const [text, setText] = useState("");
+
+  const createTree = () => {
+    console.log("createTree called, text:", text);
+    if (text.trim()) {
+      router.push(`/generate?handle=${text}`);
+    } else {
+      router.push("/generate");
+    }
+  };
 
   useEffect(() => {
     let y = 0;
@@ -111,10 +123,12 @@ export default function Home() {
           <div className="input-sec flex flex-col md:flex-row gap-6 w-full max-w-2xl">
             <input
               type="text"
+              value={text}
+              onChange={(e) => setText(e.target.value)}
               placeholder="linktr.ee/yourname"
               className="flex-1 px-6 py-4 bg-white rounded-lg focus:border-4 focus:border-green-800  focus:outline-none text-[#1e2330] font-medium"
             />
-            <button className="bg-[#254f1a] hover:bg-[#1a3a12] text-white px-8 py-4 text-lg font-bold rounded-full whitespace-nowrap transition-colors  ">
+            <button className="bg-[#254f1a] hover:bg-[#1a3a12] text-white px-8 py-4 text-lg font-bold rounded-full whitespace-nowrap transition-colors cursor-pointer">
               Get started for free
             </button>
           </div>
@@ -314,7 +328,10 @@ export default function Home() {
             more in one link in bio. Customize every detail or let Linktree
             automatically enhance it to match your brand and drive more clicks.
           </p>
-          <button className="bg-[#d2e823] hover:bg-[#c6de15] text-black px-8 py-4 text-lg font-bold rounded-full whitespace-nowrap transition-colors">
+          <button
+            onClick={() => createTree()}
+            className="bg-[#d2e823] hover:bg-[#c6de15] text-black px-8 py-4 text-lg font-bold rounded-full whitespace-nowrap transition-colors cursor-pointer"
+          >
             Get started for free
           </button>
         </div>

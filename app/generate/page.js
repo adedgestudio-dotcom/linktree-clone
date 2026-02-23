@@ -3,11 +3,13 @@ import React from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useState, useRef } from "react";
+import { useSearchParams } from "next/navigation";
 
 const generate = () => {
+  const searchParams = useSearchParams();
   const [links, setLinks] = useState([{ link: "", linktext: "" }]);
   //   const [linktext, setlinktext] = useState("");
-  const [handle, sethandle] = useState("");
+  const [handle, sethandle] = useState(searchParams.get("handle"));
   const [pic, setpic] = useState("");
 
   const linkInputRef = useRef(null);
@@ -15,25 +17,22 @@ const generate = () => {
   const picInputRef = useRef(null);
 
   const handleChange = (index, link, linktext) => {
-    setLinks((initialLinks)=>{
-        return initialLinks.map((item, i)=> {
-            if (i === index){
-                return {link, linktext}
-            }
-            else{
-                return item
-            }
-        })
-
-    })
-  }
-
+    setLinks((initialLinks) => {
+      return initialLinks.map((item, i) => {
+        if (i === index) {
+          return { link, linktext };
+        } else {
+          return item;
+        }
+      });
+    });
+  };
 
   const addLink = () => {
-    setLinks(links.concat([{link: "", linktext: ""}]))
-   }
+    setLinks(links.concat([{ link: "", linktext: "" }]));
+  };
 
-  const submitLinks = async (text, link, handle) => {
+  const submitLinks = async () => {
     try {
       const myHeaders = new Headers();
       myHeaders.append("Content-Type", "application/json");
@@ -41,11 +40,10 @@ const generate = () => {
       const raw = JSON.stringify({
         links: links,
         handle: handle,
-        pic: pic
+        pic: pic,
       });
 
-      console.log(raw);
-
+      console.log("Submitting data:", raw);
 
       const requestOptions = {
         method: "POST",
@@ -58,13 +56,16 @@ const generate = () => {
       const result = await r.json();
 
       if (result.success) {
-        toast.success("Link added successfully!");
-        setLinks([{ link: "", linktext: "" }]);
+        toast.success(result.message || "Links created successfully!");
+        setLinks([]);
+        sethandle("");
+        setpic("");
       } else {
-        toast.error("Failed to add link");
+        toast.error(result.message || "Failed to create links");
       }
     } catch (error) {
-      toast.error("Error adding link");
+      console.error("Error:", error);
+      toast.error("Error creating links: " + error.message);
     }
   };
 
@@ -136,14 +137,14 @@ const generate = () => {
                 return (
                   <div key={index} className="flex flex-col sm:flex-row gap-3">
                     <input
-                      ref={linkInputRef}
-                      value={item.link || ""}
+                      ref={linktextInputRef}
+                      value={item.linktext || ""}
                       onChange={(e) => {
-                        handleChange(index, e.target.value, item.linktext);
+                        handleChange(index, item.link, e.target.value);
                       }}
                       onKeyDown={(e) => {
                         if (e.key === "Enter") {
-                          linktextInputRef.current?.focus();
+                          linkInputRef.current?.focus();
                         }
                       }}
                       type="text"
@@ -151,10 +152,10 @@ const generate = () => {
                       className="flex-1 px-4 py-3 rounded-lg bg-white/10 backdrop-blur-sm border border-white/20 text-white placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-white/40 focus:border-transparent transition-all duration-200"
                     />
                     <input
-                      ref={linktextInputRef}
-                      value={item.linktext || ""}
+                      ref={linkInputRef}
+                      value={item.link || ""}
                       onChange={(e) => {
-                        handleChange(index, item.link, e.target.value,);
+                        handleChange(index, e.target.value, item.linktext);
                       }}
                       onKeyDown={(e) => {
                         if (e.key === "Enter") {
@@ -173,7 +174,7 @@ const generate = () => {
               onClick={() => addLink()}
               className="w-fit px-6 py-3 mt-4 bg-white text-[#d5a334] font-bold text-base sm:text-lg rounded-lg hover:bg-white/90 transform hover:scale-[1.02] transition-all duration-200 shadow-2xl hover:shadow-xl tracking-wide cursor-pointer"
             >
-              Add Link
+              + Add Link
             </button>
           </div>
 
@@ -199,8 +200,12 @@ const generate = () => {
               className="w-full px-4 py-3 rounded-lg bg-white/10 backdrop-blur-sm border border-white/20 text-white placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-white/40 focus:border-transparent transition-all duration-200"
             />
             <button
-           onClick={()=>{submitLinks}}
-            className="w-fit px-6 py-3 mt-4 bg-white text-[#d5a334] font-bold text-base sm:text-lg rounded-lg hover:bg-white/90 transform hover:scale-[1.02] transition-all duration-200 shadow-2xl hover:shadow-xl tracking-wide cursor-pointer">
+              disabled={pic == "" || handle == "" || links[0].linktext == ""}
+              onClick={() => {
+                submitLinks();
+              }}
+              className="disabled:bg-white/40 disabled:text-[#d5a334] disabled:cursor-not-allowed disabled:hover:scale-100 w-fit px-6 py-3 mt-4 bg-white text-[#d5a334] font-bold text-base sm:text-lg rounded-lg hover:bg-white/90 transform hover:scale-[1.02] transition-all duration-200 shadow-2xl hover:shadow-xl tracking-wide cursor-pointer"
+            >
               Create your Link
             </button>
           </div>

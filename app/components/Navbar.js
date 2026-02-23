@@ -9,18 +9,22 @@ const Navbar = () => {
   return (
     <nav className="navbar bg-white w-[95vw] md:w-[90vw] fixed top-4 md:top-10 right-[2.5vw] md:right-[5vw] rounded-full p-3 md:p-4 flex flex-row justify-between items-center z-50">
       <div className="logo flex flex-row gap-2 md:gap-20 items-center  ">
-        <img
-          className="h-5 md:h-6 md:ml-12 hidden md:block"
-          loading="eager"
-          src="https://cdn.prod.website-files.com/666255f7f2126f4e8cec6f8f/66634daccb34e6d65a41c76d_download.svg"
-          alt="Linktree Logo"
-        />
-        <img
-          className="h-6 w-6 block md:hidden ml-6"
-          loading="eager"
-          src="https://cdn.prod.website-files.com/666255f7f2126f4e8cec6f8f/666b48ad59add9f2777bb76f_download-2.svg"
-          alt="Linktree Tree Logo"
-        />
+        <Link href="/">
+          <img
+            className="h-5 md:h-6 md:ml-12 hidden md:block cursor-pointer"
+            loading="eager"
+            src="https://cdn.prod.website-files.com/666255f7f2126f4e8cec6f8f/66634daccb34e6d65a41c76d_download.svg"
+            alt="Linktree Logo"
+          />
+        </Link>
+        <Link href="/">
+          <img
+            className="h-6 w-6 block md:hidden ml-6 cursor-pointer"
+            loading="eager"
+            src="https://cdn.prod.website-files.com/666255f7f2126f4e8cec6f8f/666b48ad59add9f2777bb76f_download-2.svg"
+            alt="Linktree Tree Logo"
+          />
+        </Link>
 
         <ul className="hidden md:flex gap-2 text-sm">
           <li className="cursor-pointer hover:bg-[#eff0ec] font-medium py-3 px-4 rounded-lg">
