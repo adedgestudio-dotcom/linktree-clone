@@ -3,6 +3,7 @@ import "./globals.css";
 import Navbar from "./components/Navbar";
 import { Poppins } from "next/font/google";
 
+
 export const poppins = Poppins({
   subsets: ["latin"],
   variable: "--font-poppins",
@@ -28,6 +29,7 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
+
   return (
     <html lang="en">
       <body

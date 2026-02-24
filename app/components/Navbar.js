@@ -2,12 +2,21 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const Navbar = () => {
+
+  const pathname = usePathname();
+
+  const showNavbar = ["/", "/generate"].includes(pathname);
+
+
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  return (
-    <nav className="navbar bg-white w-[95vw] md:w-[90vw] fixed top-4 md:top-10 right-[2.5vw] md:right-[5vw] rounded-full p-3 md:p-4 flex flex-row justify-between items-center z-50">
+
+
+
+    return (  <> {showNavbar &&<nav className="navbar bg-white w-[95vw] md:w-[90vw] fixed top-4 md:top-10 right-[2.5vw] md:right-[5vw] rounded-full p-3 md:p-4 flex flex-row justify-between items-center z-50">
       <div className="logo flex flex-row gap-2 md:gap-20 items-center  ">
         <Link href="/">
           <img
@@ -111,6 +120,8 @@ const Navbar = () => {
         </div>
       )}
     </nav>
+    }
+    </>
   );
 };
 
