@@ -34,9 +34,16 @@ export default async function Page({ params }) {
                 />
               </div>
             )}
-            <h1 className="text-3xl md:text-4xl font-bold text-white text-center">
-              @{data.handle}
-            </h1>
+            <div className="flex flex-col items-center gap-2">
+              <h1 className="text-3xl md:text-4xl font-bold text-white text-center">
+                @{data.handle}
+              </h1>
+              {data.description && (
+                <p className="text-white/90 text-base md:text-lg text-center max-w-md px-4">
+                  {data.description}
+                </p>
+              )}
+            </div>
           </div>
 
           {/* Links Section */}
@@ -47,7 +54,7 @@ export default async function Page({ params }) {
                   key={index}
                   href={item.link}
                   target="_blank"
-                  rel="noopener noreferrer"  //target="_blank" + rel="noopener noreferrer" = Safe new tab 
+                  rel="noopener noreferrer" //target="_blank" + rel="noopener noreferrer" = Safe new tab
                   className="w-full bg-white hover:bg-white/90 text-[#d5a334] font-bold text-base md:text-lg py-4 md:py-5 px-6 rounded-full shadow-xl hover:shadow-2xl transform hover:scale-[1.02] transition-all duration-200 text-center"
                 >
                   {item.linktext}

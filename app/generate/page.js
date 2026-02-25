@@ -11,6 +11,7 @@ const generate = () => {
   //   const [linktext, setlinktext] = useState("");
   const [handle, sethandle] = useState(searchParams.get("handle"));
   const [pic, setpic] = useState("");
+  const [description, setDescription] = useState("");
 
   const linkInputRef = useRef(null);
   const linktextInputRef = useRef(null);
@@ -41,6 +42,7 @@ const generate = () => {
         links: links,
         handle: handle,
         pic: pic,
+        description: description,
       });
 
       console.log("Submitting data:", raw);
@@ -57,9 +59,10 @@ const generate = () => {
 
       if (result.success) {
         toast.success(result.message || "Links created successfully!");
-        setLinks([]);
+        setLinks([{ link: "", linktext: "" }]);
         sethandle("");
         setpic("");
+        setDescription("");
       } else {
         toast.error(result.message || "Failed to create links");
       }
@@ -124,6 +127,15 @@ const generate = () => {
               type="text"
               placeholder="choose handle"
               className="w-full px-4 py-3 rounded-lg bg-white/10 backdrop-blur-sm border border-white/20 text-white placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-white/40 focus:border-transparent transition-all duration-200"
+            />
+            <textarea
+              value={description || ""}
+              onChange={(e) => {
+                setDescription(e.target.value);
+              }}
+              placeholder="Add a short bio or description"
+              rows="3"
+              className="w-full px-4 py-3 rounded-lg bg-white/10 backdrop-blur-sm border border-white/20 text-white placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-white/40 focus:border-transparent transition-all duration-200 resize-none"
             />
           </div>
 
