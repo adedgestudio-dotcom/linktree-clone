@@ -128,7 +128,10 @@ export default function Home() {
               placeholder="linktr.ee/yourname"
               className="flex-1 px-6 py-4 bg-white rounded-lg focus:border-4 focus:border-green-800  focus:outline-none text-[#1e2330] font-medium"
             />
-            <button className="bg-[#254f1a] hover:bg-[#1a3a12] text-white px-8 py-4 text-lg font-bold rounded-full whitespace-nowrap transition-colors cursor-pointer">
+            <button
+              onClick={createTree}
+              className="bg-[#254f1a] hover:bg-[#1a3a12] text-white px-8 py-4 text-lg font-bold rounded-full whitespace-nowrap transition-colors cursor-pointer"
+            >
               Get started for free
             </button>
           </div>

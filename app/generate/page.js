@@ -59,10 +59,10 @@ const generate = () => {
 
       if (result.success) {
         toast.success(result.message || "Links created successfully!");
-        setLinks([{ link: "", linktext: "" }]);
-        sethandle("");
-        setpic("");
-        setDescription("");
+        // Redirect to the created linktree page
+        setTimeout(() => {
+          window.location.href = `/${handle}`;
+        }, 1500);
       } else {
         toast.error(result.message || "Failed to create links");
       }
@@ -74,7 +74,7 @@ const generate = () => {
 
   return (
     <div className="bg-[#d5a334] grid grid-cols-1 lg:grid-cols-2 min-h-screen">
-      <div className="form flex justify-center items-center flex-col px-6 sm:px-8 lg:px-14 py-8 lg:py-0 mt-[15vh] ">
+      <div className="form flex justify-center items-center flex-col px-6 sm:px-8 lg:px-14 py-8 lg:py-0 mt-[22vh] ">
         <div className="w-full max-w-2xl space-y-6">
           <div className="text-center mb-4">
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-2">
@@ -117,7 +117,12 @@ const generate = () => {
             <input
               value={handle || ""}
               onChange={(e) => {
-                sethandle(e.target.value);
+                // Remove spaces and special characters, convert to lowercase
+                const sanitized = e.target.value
+                  .toLowerCase()
+                  .replace(/\s+/g, "-") // Replace spaces with hyphens
+                  .replace(/[^a-z0-9-_]/g, ""); // Only allow letters, numbers, hyphens, underscores
+                sethandle(sanitized);
               }}
               onKeyDown={(e) => {
                 if (e.key === "Enter") {
@@ -125,7 +130,7 @@ const generate = () => {
                 }
               }}
               type="text"
-              placeholder="choose handle"
+              placeholder="choose handle (e.g., sarah-profile)"
               className="w-full px-4 py-3 rounded-lg bg-white/10 backdrop-blur-sm border border-white/20 text-white placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-white/40 focus:border-transparent transition-all duration-200"
             />
             <textarea
