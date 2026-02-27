@@ -16,3 +16,10 @@ const handler = NextAuth({
       session.user.id = token.sub;
       return session;
     },
+  },
+  pages: {
+    signIn: "/", // Redirect to home page for sign in
+  },
+});
+
+export { handler as GET, handler as POST };
