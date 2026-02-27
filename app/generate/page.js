@@ -4,9 +4,11 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useState, useRef } from "react";
 import { useSearchParams } from "next/navigation";
+import { useSession } from "next-auth/react";
 
 const generate = () => {
   const searchParams = useSearchParams();
+  const { data: session } = useSession();
   const [links, setLinks] = useState([{ link: "", linktext: "" }]);
   //   const [linktext, setlinktext] = useState("");
   const [handle, sethandle] = useState(searchParams.get("handle"));
@@ -43,6 +45,7 @@ const generate = () => {
         handle: handle,
         pic: pic,
         description: description,
+        userEmail: session?.user?.email || null, // Save user email to track ownership
       });
 
       console.log("Submitting data:", raw);
