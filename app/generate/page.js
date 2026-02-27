@@ -62,10 +62,10 @@ function GenerateContent() {
 
       if (result.success) {
         toast.success(result.message || "Links created successfully!");
-        // Redirect to the created linktree page
+        // Wait a bit longer for MongoDB to finish saving
         setTimeout(() => {
-          window.location.href = `/${handle}`;
-        }, 1500);
+          window.location.href = `/${encodeURIComponent(handle)}`;
+        }, 2000);
       } else {
         toast.error(result.message || "Failed to create links");
       }
