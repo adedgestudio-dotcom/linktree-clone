@@ -2,16 +2,16 @@
 import React from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useState, useRef } from "react";
+import { useState, useRef, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { useSession } from "next-auth/react";
 
-const generate = () => {
+function GenerateContent() {
   const searchParams = useSearchParams();
   const { data: session } = useSession();
   const [links, setLinks] = useState([{ link: "", linktext: "" }]);
   //   const [linktext, setlinktext] = useState("");
-  const [handle, sethandle] = useState(searchParams.get("handle"));
+  const [handle, sethandle] = useState(searchParams.get("handle") || "");
   const [pic, setpic] = useState("");
   const [description, setDescription] = useState("");
 
@@ -241,6 +241,18 @@ const generate = () => {
       <ToastContainer />
     </div>
   );
-};
+}
 
-export default generate;
+export default function Generate() {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen bg-[#d5a334] flex items-center justify-center">
+          <div className="text-white text-2xl">Loading...</div>
+        </div>
+      }
+    >
+      <GenerateContent />
+    </Suspense>
+  );
+}
