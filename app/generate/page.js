@@ -66,6 +66,15 @@ function GenerateContent() {
     setLinks(links.concat([{ link: "", linktext: "" }]));
   };
 
+  const deleteLink = (index) => {
+    // Don't allow deleting if only one link remains
+    if (links.length === 1) {
+      toast.warning("You must have at least one link!");
+      return;
+    }
+    setLinks(links.filter((_, i) => i !== index));
+  };
+
   const submitLinks = async () => {
     try {
       const myHeaders = new Headers();
@@ -186,7 +195,10 @@ function GenerateContent() {
             {links &&
               links.map((item, index) => {
                 return (
-                  <div key={index} className="flex flex-col sm:flex-row gap-3">
+                  <div
+                    key={index}
+                    className="flex flex-col sm:flex-row gap-3 items-start"
+                  >
                     <input
                       ref={linktextInputRef}
                       value={item.linktext || ""}
@@ -217,6 +229,27 @@ function GenerateContent() {
                       placeholder="Enter link"
                       className="flex-1 px-4 py-3 rounded-lg bg-white/10 backdrop-blur-sm border border-white/20 text-white placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-white/40 focus:border-transparent transition-all duration-200"
                     />
+                    {links.length > 1 && (
+                      <button
+                        onClick={() => deleteLink(index)}
+                        className="p-3 bg-red-500/20 hover:bg-red-500/30 text-white rounded-lg transition-all duration-200"
+                        title="Delete this link"
+                      >
+                        <svg
+                          className="w-5 h-5"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                          />
+                        </svg>
+                      </button>
+                    )}
                   </div>
                 );
               })}
@@ -270,6 +303,27 @@ function GenerateContent() {
         />
       </div>
       <ToastContainer />
+
+      {/* Floating Home Button */}
+      <a
+        href="/"
+        className="fixed bottom-8 left-8 bg-white text-[#d5a334] p-4 rounded-full shadow-2xl hover:shadow-xl transform hover:scale-105 transition-all duration-200 z-50"
+        title="Go to Home"
+      >
+        <svg
+          className="w-6 h-6"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+          />
+        </svg>
+      </a>
     </div>
   );
 }
