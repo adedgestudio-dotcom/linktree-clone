@@ -17,8 +17,28 @@ export default function MyLinks() {
     }
 
     // Fetch user's links from database
-    if (session?.us
-me="min-h-screen bg-[#d5a334] flex items-center justify-center">
+    if (session?.user?.email) {
+      fetchUserLinks();
+    }
+  }, [session, status, router]);
+
+  const fetchUserLinks = async () => {
+    try {
+      const response = await fetch(`/api/mylinks?email=${session.user.email}`);
+      const data = await response.json();
+      if (data.success) {
+        setLinks(data.links);
+      }
+    } catch (error) {
+      console.error("Error fetching links:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  if (status === "loading" || loading) {
+    return (
+      <div className="min-h-screen bg-[#d5a334] flex items-center justify-center">
         <div className="text-white text-2xl">Loading...</div>
       </div>
     );
@@ -28,7 +48,9 @@ me="min-h-screen bg-[#d5a334] flex items-center justify-center">
     <div className="min-h-screen bg-[#d5a334] pt-32 px-4 md:px-8">
       <div className="max-w-4xl mx-auto">
         <div className="flex justify-between items-center mb-8">
-          <h1 className="text-4xl md:text-5xl font-bold text-white">My Links</h1>
+          <h1 className="text-4xl md:text-5xl font-bold text-white">
+            My Links
+          </h1>
           <Link href="/generate">
             <button className="bg-white text-[#d5a334] px-6 py-3 rounded-full font-bold hover:bg-white/90 transition-all">
               + Create New
@@ -38,7 +60,9 @@ me="min-h-screen bg-[#d5a334] flex items-center justify-center">
 
         {links.length === 0 ? (
           <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-12 text-center">
-            <p className="text-white text-xl mb-6">You haven't created any links yet!</p>
+            <p className="text-white text-xl mb-6">
+              You haven't created any links yet!
+            </p>
             <Link href="/generate">
               <button className="bg-white text-[#d5a334] px-8 py-4 rounded-full font-bold hover:bg-white/90 transition-all">
                 Create Your First Link
@@ -54,7 +78,9 @@ me="min-h-screen bg-[#d5a334] flex items-center justify-center">
               >
                 <div className="flex justify-between items-start mb-4">
                   <div>
-                    <h2 className="text-2xl font-bold text-[#d5a334]">@{item.handle}</h2>
+                    <h2 className="text-2xl font-bold text-[#d5a334]">
+                      @{item.handle}
+                    </h2>
                     {item.description && (
                       <p className="text-gray-600 mt-2">{item.description}</p>
                     )}
@@ -66,7 +92,9 @@ me="min-h-screen bg-[#d5a334] flex items-center justify-center">
                   </Link>
                 </div>
                 <div className="border-t pt-4">
-                  <p className="text-sm text-gray-500 mb-2">Links: {item.links?.length || 0}</p>
+                  <p className="text-sm text-gray-500 mb-2">
+                    Links: {item.links?.length || 0}
+                  </p>
                   <div className="flex flex-wrap gap-2">
                     {item.links?.slice(0, 3).map((link, idx) => (
                       <span
