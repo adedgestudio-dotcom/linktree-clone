@@ -70,6 +70,27 @@ export default function ProfilePage({ data, handle }) {
         </div>
       </div>
 
+      {/* Floating Home Button */}
+      <a
+        href="/"
+        className="fixed bottom-8 left-8 bg-white text-[#d5a334] p-4 rounded-full shadow-2xl hover:shadow-xl transform hover:scale-105 transition-all duration-200"
+        title="Go to Home"
+      >
+        <svg
+          className="w-6 h-6"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+          />
+        </svg>
+      </a>
+
       {/* Floating Copy Button */}
       <button
         onClick={copyLink}
@@ -77,31 +98,7 @@ export default function ProfilePage({ data, handle }) {
       >
         {copied ? (
           <>
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-            </svg>
-            Copied!
-          </>
-        ) : (
-          <>
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
-            </svg>
-            Share Link
-          </>
-        )}
-      </button>
-
-      {/* Floating Home Button */}
-      <a
-        href="/"
-        className="fixed bottom-8 left-8 bg-white text-[#d5a334] p-4 rounded-full shadow-2xl hover:shadow-xl transform hover:scale-105 transition-all duration-200"
-        title="Go to Home"
-      >
-        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-        </svg>
-      </a>
+            <svg
               className="w-5 h-5"
               fill="none"
               stroke="currentColor"
