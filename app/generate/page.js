@@ -4,11 +4,11 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useState, useRef, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
-import { useSession } from "next-auth/react";
+import { useSession, signIn } from "next-auth/react";
 
 function GenerateContent() {
   const searchParams = useSearchParams();
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
   const [links, setLinks] = useState([{ link: "", linktext: "" }]);
   //   const [linktext, setlinktext] = useState("");
   const [handle, sethandle] = useState(searchParams.get("handle") || "");
@@ -18,6 +18,37 @@ function GenerateContent() {
   const linkInputRef = useRef(null);
   const linktextInputRef = useRef(null);
   const picInputRef = useRef(null);
+
+  // Show login prompt if not authenticated
+  if (status === "loading") {
+    return (
+      <div className="min-h-screen bg-[#d5a334] flex items-center justify-center">
+        <div className="text-white text-2xl">Loading...</div>
+      </div>
+    );
+  }
+
+  if (!session) {
+    return (
+      <div className="min-h-screen bg-[#d5a334] flex items-center justify-center px-4">
+        <div className="bg-white rounded-2xl p-8 md:p-12 max-w-md text-center">
+          <h1 className="text-3xl font-bold text-[#d5a334] mb-4">
+            Sign In Required
+          </h1>
+          <p className="text-gray-700 mb-6">
+            You need to sign in with Google to create your linktree and manage
+            your links.
+          </p>
+          <button
+            onClick={() => signIn("google")}
+            className="bg-[#d5a334] hover:bg-[#c6941f] text-white px-8 py-4 rounded-full font-bold transition-all"
+          >
+            Sign in with Google
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   const handleChange = (index, link, linktext) => {
     setLinks((initialLinks) => {
