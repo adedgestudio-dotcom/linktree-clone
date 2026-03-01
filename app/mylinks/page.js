@@ -70,47 +70,29 @@ export default function MyLinks() {
             </Link>
           </div>
         ) : (
-          <div className="grid gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {links.map((item, index) => (
               <div
                 key={index}
-                className="bg-white rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all"
+                className="bg-white rounded-2xl p-8 shadow-xl hover:shadow-2xl transition-all flex flex-col items-center justify-center gap-6"
               >
-                <div className="flex justify-between items-start mb-4">
-                  <div>
-                    <h2 className="text-2xl font-bold text-[#d5a334]">
-                      @{item.handle}
-                    </h2>
-                    {item.description && (
-                      <p className="text-gray-600 mt-2">{item.description}</p>
-                    )}
-                  </div>
-                  <Link href={`/${item.handle}`} target="_blank">
-                    <button className="bg-[#d5a334] text-white px-4 py-2 rounded-full font-bold hover:bg-[#c6941f] transition-all">
-                      View Page
-                    </button>
-                  </Link>
+                <div className="text-center">
+                  <h2 className="text-3xl font-bold text-[#d5a334] mb-2">
+                    @{item.handle}
+                  </h2>
+                  {item.description && (
+                    <p className="text-gray-600 text-sm">{item.description}</p>
+                  )}
                 </div>
-                <div className="border-t pt-4">
-                  <p className="text-sm text-gray-500 mb-2">
-                    Links: {item.links?.length || 0}
-                  </p>
-                  <div className="flex flex-wrap gap-2">
-                    {item.links?.slice(0, 3).map((link, idx) => (
-                      <span
-                        key={idx}
-                        className="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm"
-                      >
-                        {link.linktext}
-                      </span>
-                    ))}
-                    {item.links?.length > 3 && (
-                      <span className="text-gray-500 text-sm">
-                        +{item.links.length - 3} more
-                      </span>
-                    )}
-                  </div>
-                </div>
+                <Link
+                  href={`/${item.handle}`}
+                  target="_blank"
+                  className="w-full"
+                >
+                  <button className="w-full bg-[#d5a334] text-white py-3 px-6 rounded-full font-bold hover:bg-[#c6941f] transition-all">
+                    View My Page
+                  </button>
+                </Link>
               </div>
             ))}
           </div>
