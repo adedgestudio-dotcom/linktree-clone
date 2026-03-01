@@ -106,16 +106,16 @@ export default function MyLinks() {
                   key={index}
                   className="flex items-center justify-between p-4 bg-gray-50 rounded-xl hover:bg-gray-100 transition-all"
                 >
-                  <div className="flex items-center gap-3">
-                    <span className="text-2xl font-bold text-[#d5a334]">
+                  <div className="flex items-start gap-3 flex-1">
+                    <span className="text-2xl font-bold text-[#d5a334] mt-0.5">
                       {index + 1}.
                     </span>
-                    <div>
+                    <div className="flex-1">
                       <h3 className="text-xl font-medium text-gray-800">
                         @{item.handle}
                       </h3>
                       {item.description && (
-                        <p className="text-sm text-gray-600">
+                        <p className="text-sm text-gray-600 ml-0">
                           {item.description}
                         </p>
                       )}
