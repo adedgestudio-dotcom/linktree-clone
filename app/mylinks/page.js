@@ -115,7 +115,7 @@ export default function MyLinks() {
                         @{item.handle}
                       </h3>
                       {item.description && (
-                        <p className="text-sm text-gray-600 ml-0">
+                        <p className="text-sm text-gray-600 ml-0 ml-5">
                           {item.description}
                         </p>
                       )}
